@@ -1,8 +1,11 @@
 pragma solidity >=0.8.0;
 
+import "./abstracts/AbstractZksync.sol";
+
 contract SaitoPool {
   address owner;
   address immutable ZKSync;
+  address immutable SaitoZK;
   mapping(address => uint256) public poolBalance;
   address[] public poolUsers;
   uint256 public poolUsersQty;
@@ -98,7 +101,11 @@ contract SaitoPool {
     return true;
   }
 
-  function bridge()
+  function bridge() public returns() {
+    Zksync zk = Zksync(ZKSync);
+
+    zk.depositETH(poolTotal, SaitoZK);
+  }
 
   // allow deposits
   function() payable external {}		
