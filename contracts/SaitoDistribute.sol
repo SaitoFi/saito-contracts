@@ -1,3 +1,4 @@
+/*
 pragma solidity >=0.8.0;
 
 struct BridgeVals {
@@ -6,7 +7,7 @@ struct BridgeVals {
 }
 
 contract SaitoDistribute {
-	function distribute(BridgeVals[] _bridgeVals, uint256 _totalAmount) public returns (bool success) {
+	function distribute(BridgeVals[] memory _bridgeVals, uint256 _totalAmount) public returns (bool success) {
 		require(address(this).balance >= _totalAmount);
 
 		for (uint256 i; i < _bridgeVals.length; i++) {
@@ -16,3 +17,4 @@ contract SaitoDistribute {
 		return true;
 	}
 }
+*/

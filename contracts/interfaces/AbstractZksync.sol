@@ -1,3 +1,4 @@
+/*
 pragma solidity >=0.8.0;
 
 abstract contract AbstractZksync {
@@ -5,3 +6,4 @@ abstract contract AbstractZksync {
 
 	function depositETH(address _zkSyncAddress) external payable;
 }
+*/

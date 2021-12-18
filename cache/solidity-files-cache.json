@@ -1,0 +1,172 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/mattfirth/Documents/Saito/saito-contracts/contracts/SaitoArbiPool.sol": {
+      "lastModificationDate": 1639799892500,
+      "contentHash": "fcff3c50373b285edc5fb4e40a8d1d40",
+      "sourceName": "contracts/SaitoArbiPool.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/Arbitrum.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "SaitoArbPool"
+      ]
+    },
+    "/Users/mattfirth/Documents/Saito/saito-contracts/contracts/SaitoDistribute.sol": {
+      "lastModificationDate": 1639717949265,
+      "contentHash": "6f62b94c6c47317456d31d749f02e413",
+      "sourceName": "contracts/SaitoDistribute.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": []
+    },
+    "/Users/mattfirth/Documents/Saito/saito-contracts/contracts/SaitoZkPool.sol": {
+      "lastModificationDate": 1639717957989,
+      "contentHash": "c133f4bcbbd7b1487c486cd387495c18",
+      "sourceName": "contracts/SaitoZkPool.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": []
+    },
+    "/Users/mattfirth/Documents/Saito/saito-contracts/contracts/interfaces/AbstractZksync.sol": {
+      "lastModificationDate": 1639717973832,
+      "contentHash": "d1d223475a70d9bc7d6d9ea6b7390256",
+      "sourceName": "contracts/interfaces/AbstractZksync.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [],
+      "artifacts": []
+    },
+    "/Users/mattfirth/Documents/Saito/saito-contracts/contracts/interfaces/Arbitrum.sol": {
+      "lastModificationDate": 1639799780545,
+      "contentHash": "ab90fab7fcb1104b03cd3af04f73ef1e",
+      "sourceName": "contracts/interfaces/Arbitrum.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "IBridge",
+        "IInbox",
+        "IMessageProvider"
+      ]
+    }
+  }
+}

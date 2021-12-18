@@ -1,11 +1,11 @@
 pragma solidity >=0.8.0;
 
-import "./abstracts/AbstractZksync.sol";
+import "./interfaces/Arbitrum.sol";
 
-contract SaitoPool {
-  address owner;
-  address immutable ZKSync;
-  address immutable SaitoZK;
+contract SaitoArbPool {
+  // address owner;
+  address immutable SaitoL2;
+  IInbox public arbitrum;
   mapping(address => uint256) public poolBalance;
   address[] public poolUsers;
   uint256 public poolUsersQty;
@@ -14,6 +14,15 @@ contract SaitoPool {
 
   uint256 public MIN_USERS;
   uint256 public MIN_TOTAL;
+
+  constructor(address _saitoL2, address _arbitrum, uint256 _minUsers, uint256 _minTotal) {
+    SaitoL2 = _saitoL2;
+    arbitrum = IInbox(_arbitrum);
+    MIN_USERS = _minUsers;
+    MIN_TOTAL = _minTotal;
+
+    isPoolOpen = true;
+  }
 
   // helper functions
   function sqrt(uint256 y) internal pure returns (uint256 z) {
@@ -29,20 +38,20 @@ contract SaitoPool {
     }
   }
 
-  function remove(address _addressToRemove, address[] _array)  returns(address[]) {
+  function remove(address _addressToRemove) public {
+    uint256 index = 0;
 
-    address[] storage auxArray;
-
-    for (uint i = 0; i < _array.length; i++){
-        if(_array[i] != _addressToRemove)
-            auxArray.push(_array[i]);
+    for (uint i = 0; i < poolUsers.length; i++){
+        if(poolUsers[i] != _addressToRemove)
+            index = i;
     }
 
-    return auxArray;
+    delete poolUsers[index];
   }
 
   function checkDeposit() public returns(bool success) {
     if (poolUsersQty >= MIN_USERS && poolTotal >= MIN_TOTAL) {
+      closePool();
       return true;
     }
 
@@ -50,9 +59,14 @@ contract SaitoPool {
   }
 
   function calcTotalFees(uint256 _avgGas) public returns(uint256 fees) {
-    uint256 fees = _avgGas + (_avgGas * sqrt(poolUsers));
+    uint256 fees = _avgGas + (_avgGas * sqrt(poolUsersQty));
 
     return fees;
+  }
+
+  function applyL1ToL2Alias(address l1Address) internal pure returns (address l2Address) {
+    uint160 offset = uint160(0x1111000000000000000000000000000000001111);
+    l2Address = address(uint160(l1Address) + offset);
   }
 
 
@@ -60,21 +74,20 @@ contract SaitoPool {
   function addPoolUser(address _depositer, uint256 _amount) public returns(bool success) {
     if (poolBalance[_depositer] == 0) {
       poolUsersQty += 1;
-      poolUsers.push(_depositer)
+      poolUsers.push(_depositer);
     }
 
     poolBalance[_depositer] += _amount;
     poolTotal += _amount;
 
-    return true
+    return true;
   }
 
   function removePoolUser(address _depositer) public returns(bool success) {
     poolUsersQty -= 1;
-    updatedPoolUsers = remove(_depositer, poolUsers);
-    poolUsers = updatedPoolUsers;
+    remove(_depositer);
 
-    return success
+    return true;
   }
 
   function withdrawPoolUser(address _depositer, uint256 _amount) public returns(bool success) {
@@ -101,12 +114,17 @@ contract SaitoPool {
     return true;
   }
 
-  function bridge() public returns() {
-    Zksync zk = Zksync(ZKSync);
+  function bridge() public returns(bool success) {
+    require(!isPoolOpen);
+    uint256 fees = calcTotalFees(10000000000000000);
+    uint256 poolTotalNetFees = poolTotal - fees;
 
-    zk.depositETH(poolTotal, SaitoZK);
+    arbitrum.createRetryableTicket{value: poolTotalNetFees}(SaitoL2, 0, 100000000000, SaitoL2, SaitoL2, 0, 0, '0x');
+    openPool();
+
+    return true;
   }
 
   // allow deposits
-  function() payable external {}		
+  fallback() payable external {}		
 }
