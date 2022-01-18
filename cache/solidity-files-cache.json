@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/mattfirth/Documents/Saito/saito-contracts/contracts/SaitoArbiPool.sol": {
-      "lastModificationDate": 1639799892500,
-      "contentHash": "fcff3c50373b285edc5fb4e40a8d1d40",
+      "lastModificationDate": 1639855840682,
+      "contentHash": "d16e3cd6a5a35e6db5592ff000906c7c",
       "sourceName": "contracts/SaitoArbiPool.sol",
       "solcConfig": {
         "version": "0.8.0",

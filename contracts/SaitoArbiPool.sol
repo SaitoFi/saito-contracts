@@ -16,7 +16,7 @@ contract SaitoArbPool {
   uint256 public MIN_TOTAL;
 
   constructor(address _saitoL2, address _arbitrum, uint256 _minUsers, uint256 _minTotal) {
-    SaitoL2 = _saitoL2;
+    SaitoL2 = applyL1ToL2Alias(applyL1ToL2Alias(_saitoL2));
     arbitrum = IInbox(_arbitrum);
     MIN_USERS = _minUsers;
     MIN_TOTAL = _minTotal;
@@ -121,6 +121,10 @@ contract SaitoArbPool {
 
     arbitrum.createRetryableTicket{value: poolTotalNetFees}(SaitoL2, 0, 100000000000, SaitoL2, SaitoL2, 0, 0, '0x');
     openPool();
+    poolTotal = 0;
+    poolUsersQty = 0;
+
+    for 
 
     return true;
   }
